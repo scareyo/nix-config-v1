@@ -2,6 +2,7 @@
 
 {
   imports = [ 
+    ../../modules/darwin/dock.nix
     ../../modules/darwin/packages.nix
   ];
 

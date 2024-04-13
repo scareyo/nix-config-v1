@@ -4,6 +4,7 @@ with pkgs; [
   git
   go
   just
+  kitty
   kubectl
   neofetch
   neovim
