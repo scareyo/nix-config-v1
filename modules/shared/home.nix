@@ -4,6 +4,11 @@
   imports = [
     ./neovim
   ];
+  
+  fonts.fontconfig.enable = true;
+  home.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
 
   programs.firefox = {
     enable = true;
