@@ -5,6 +5,7 @@
   let packages = import ../shared/packages.nix { inherit pkgs; }; in
   packages ++ [
     alt-tab-macos
+    discord
     vscode
   ];
 
