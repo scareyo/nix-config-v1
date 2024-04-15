@@ -30,7 +30,6 @@
     userEmail = "sam@scarey.me";
   };
 
-
   programs.zsh = {
     enable = true;
     oh-my-zsh = {
