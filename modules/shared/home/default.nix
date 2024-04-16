@@ -27,6 +27,13 @@
     enable = true;
     userName = "Samuel Carey";
     userEmail = "sam@scarey.me";
+    signing = {
+      key = null;
+      signByDefault = true;
+    };
+    extraConfig = {
+      diff.tool = "nvimdiff";
+    };
   };
 
   programs.zsh = {
@@ -41,6 +48,11 @@
   };
 
   programs.gpg.enable = true;
+
+  services.gpg-agent = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   home.sessionVariables = rec {
     GPG_TTY = "$(tty)";
