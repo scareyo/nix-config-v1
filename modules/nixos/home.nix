@@ -10,6 +10,10 @@
 
   programs.gnome-terminal.profile.default.font = "JetBrainsMono";
     
-  services.gpg-agent.pinentryPackage = pkgs.pinentry-gnome3;
+  services.gpg-agent = {
+    enable = true;
+    enableZshIntegration = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
+  };
 }
 

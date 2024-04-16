@@ -49,11 +49,6 @@
 
   programs.gpg.enable = true;
 
-  services.gpg-agent = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
   home.sessionVariables = rec {
     GPG_TTY = "$(tty)";
   };
