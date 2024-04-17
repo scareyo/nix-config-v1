@@ -13,6 +13,7 @@
     enable = true;
     casks = [
       "firefox"
+      "steam"
     ];
   };
 
