@@ -9,5 +9,6 @@ with pkgs; [
   neofetch
   neovim
   oh-my-zsh
+  unzip
   zsh
 ]

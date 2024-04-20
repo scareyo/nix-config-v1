@@ -1,4 +1,4 @@
-deploy:
+switch:
   {{ if os() == "macos" { "darwin" } else { "nixos" } }}-rebuild switch --flake .
 
 debug:

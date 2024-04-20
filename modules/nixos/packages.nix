@@ -6,6 +6,7 @@
     packages ++ [
       cider
       firefox
+      prismlauncher
       vesktop
     ];
 }
