@@ -11,6 +11,10 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    # Agenix
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+
     # Homebrew
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
@@ -31,13 +35,16 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, nur, nix-darwin, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nur, nix-darwin, agenix, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, ... }@inputs: {
     nixosConfigurations.teseuka = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./hosts/teseuka
           
         { nixpkgs.overlays = [ nur.overlay ]; }
+
+        agenix.nixosModules.default
+        { environment.systemPackages = [ agenix.packages.x86_64-linux.default ]; }
 
         home-manager.nixosModules.home-manager
         {
