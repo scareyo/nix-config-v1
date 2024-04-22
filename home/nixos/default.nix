@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../shared/home
+    ../shared
 
     ./hyprland
   ];

@@ -56,7 +56,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.scarey = import ./modules/nixos/home;
+          home-manager.users.scarey = import ./home/nixos;
         }
       ];
     };
@@ -72,7 +72,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.scarey = import ./modules/darwin/home.nix;
+            home-manager.users.scarey = import ./home/darwin;
           }
 
           nix-homebrew.darwinModules.nix-homebrew

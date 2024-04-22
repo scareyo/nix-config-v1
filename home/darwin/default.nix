@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../shared/home
+    ../shared
   ];
 
   home.username = "scarey"; 
