@@ -2,7 +2,9 @@
 
 {
   imports = [
-    ../shared/home
+    ../../shared/home
+
+    ./hyprland
   ];
 
   home.username = "scarey"; 

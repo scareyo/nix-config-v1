@@ -9,7 +9,9 @@
   
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    noto-fonts
+    noto-fonts-cjk
+    (nerdfonts.override { fonts = [ "Meslo" ]; })
   ];
 
   programs.firefox = {
@@ -37,7 +39,6 @@
     };
   };
 
-  
   programs.gpg.enable = true;
 
   home.sessionVariables = rec {

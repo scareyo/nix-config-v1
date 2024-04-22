@@ -15,6 +15,9 @@
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # NixOS Hardware
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
+
     # Homebrew
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
@@ -35,11 +38,14 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, nur, nix-darwin, agenix, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, nur, nix-darwin, agenix, nixos-hardware, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, ... }@inputs: {
     nixosConfigurations.teseuka = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./hosts/teseuka
+
+        # Disable NVIDIA
+        nixos-hardware.nixosModules.common-gpu-nvidia-disable
           
         { nixpkgs.overlays = [ nur.overlay ]; }
 
@@ -50,7 +56,7 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.scarey = import ./modules/nixos/home.nix;
+          home-manager.users.scarey = import ./modules/nixos/home;
         }
       ];
     };

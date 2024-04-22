@@ -2,12 +2,11 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, home-manager, ... }:
+{ lib, pkgs, home-manager, ... }:
 
 {
   imports = [ 
     ../../modules/nixos
-    ../../modules/nixos/gnome.nix
     ../../modules/nixos/packages.nix
 
     # Include the results of the hardware scan.
@@ -16,13 +15,26 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Bootloader
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
 
-  boot.initrd.luks.devices."luks-ca609995-42af-4bdb-b348-584b6bcf8001".device = "/dev/disk/by-uuid/ca609995-42af-4bdb-b348-584b6bcf8001";
+    initrd.luks.devices."luks-ca609995-42af-4bdb-b348-584b6bcf8001".device = "/dev/disk/by-uuid/ca609995-42af-4bdb-b348-584b6bcf8001";
 
-  boot.kernelModules = ["i2c-dev"];
+    kernelModules = ["i2c-dev"];
+
+    extraModprobeConfig = lib.mkDefault ''
+      blacklist nouveau
+      options nouveau modeset=0
+    '';
+
+    blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
+  };
+
+  hardware.opengl.enable = true;
 
   networking.hostName = "teseuka"; # Define your hostname.
 
