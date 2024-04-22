@@ -4,6 +4,7 @@
   imports = [
     ./kitty
     ./neovim
+    ./zsh
   ];
   
   fonts.fontconfig.enable = true;
@@ -36,17 +37,7 @@
     };
   };
 
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh = {
-      enable = true;
-      theme = "robbyrussell";
-      plugins = [
-	"git"
-      ];
-    };
-  };
-
+  
   programs.gpg.enable = true;
 
   home.sessionVariables = rec {
