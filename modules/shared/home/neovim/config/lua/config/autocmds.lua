@@ -18,5 +18,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
             vim.opt.shiftwidth = 2
             vim.opt.softtabstop = 2
         end
+        if (vim.bo.filetype == "nix") then
+            vim.opt.shiftwidth = 2
+            vim.opt.softtabstop = 2
+        end
     end,
 })
