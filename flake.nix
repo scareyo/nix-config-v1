@@ -18,6 +18,13 @@
     # NixOS Hardware
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Homebrew
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
@@ -38,28 +45,34 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = { self, nixpkgs, nur, nix-darwin, agenix, nixos-hardware, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, ... }@inputs: {
-    nixosConfigurations.teseuka = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/teseuka
+  outputs = inputs@{ self, nixpkgs, nur, nix-darwin, agenix, nixos-hardware, hyprland, hyprland-plugins, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, ... }: {
 
-        # Disable NVIDIA
-        nixos-hardware.nixosModules.common-gpu-nvidia-disable
-          
-        { nixpkgs.overlays = [ nur.overlay ]; }
+    nixosConfigurations.teseuka =
+      let
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/teseuka
 
-        agenix.nixosModules.default
-        { environment.systemPackages = [ agenix.packages.x86_64-linux.default ]; }
+          # Disable NVIDIA
+          nixos-hardware.nixosModules.common-gpu-nvidia-disable
+            
+          { nixpkgs.overlays = [ nur.overlay ]; }
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.scarey = import ./home/nixos;
-        }
-      ];
-    };
+          agenix.nixosModules.default
+          { environment.systemPackages = [ agenix.packages.x86_64-linux.default ]; }
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.scarey = import ./home/nixos;
+            home-manager.extraSpecialArgs = specialArgs;
+          }
+        ];
+      in
+      nixpkgs.lib.nixosSystem { inherit system modules specialArgs; };
+
     darwinConfigurations = {
       system = "aarch64-darwin";
       vegapunk = nix-darwin.lib.darwinSystem {
