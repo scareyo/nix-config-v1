@@ -37,7 +37,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -50,5 +49,16 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  programs.dconf.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+    config.common.default = "*";
   };
 }

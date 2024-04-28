@@ -8,22 +8,25 @@
     nur.url = github:nix-community/NUR;
     
     # Nix Darwin
-    nix-darwin.url = "github:LnL7/nix-darwin";
-    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Agenix
-    agenix.url = "github:ryantm/agenix";
-    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # NixOS Hardware
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
+
+    # Anyrun
+    anyrun.url = "github:Kirottu/anyrun";
 
     # Homebrew
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
@@ -45,7 +48,7 @@
     home-manager.url = "github:nix-community/home-manager";
   };
 
-  outputs = inputs@{ self, nixpkgs, nur, nix-darwin, agenix, nixos-hardware, hyprland, hyprland-plugins, nix-homebrew, homebrew-bundle, homebrew-core, homebrew-cask, home-manager, ... }: {
+  outputs = inputs@{ self, agenix, home-manager, homebrew-bundle, homebrew-cask, homebrew-core, nix-darwin, nix-homebrew, nixos-hardware, nixpkgs, nur, ... }: {
 
     nixosConfigurations.teseuka =
       let
