@@ -17,23 +17,24 @@
         "$mod, R, exec, anyrun"
       ];
 
-      exec = [
-        "eww daemon"
-        "eww open example"
-      ];
-
       exec-once = [
-        "exec-once=dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+        "eww daemon"
+        "eww open bar"
       ];
 
       bindm = [
         "$mod, mouse:272, movewindow"
       ];
 
+      layerrule = [
+        "blur, anyrun"
+      ];
+
       general = {
         "col.active_border" = "rgb(89b4fa)";
         "col.inactive_border" = "rgb(11111b)";
-        gaps_out = "50, 20, 20, 20";
+        gaps_out = "20";
         hover_icon_on_border = false;
         no_cursor_warps = true;
         resize_on_border = true;
@@ -44,6 +45,11 @@
       };
 
       decoration = {
+        blur = {
+          enabled = true;
+          size = 4;
+          passes = 2;
+        };
         rounding = 8;
       };
 

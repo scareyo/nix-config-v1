@@ -9,14 +9,16 @@
         inputs.anyrun.packages.${pkgs.system}.applications
       ];
 
+      y = { absolute = 400; };
+      width = { absolute = 512; };
+
       closeOnClick = true;
       hidePluginInfo = true;
-      width = { absolute = 400; };
     };
     
     extraCss = ''
       #window {
-        background-color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.5);
       }
 
       box#main {
