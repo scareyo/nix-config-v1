@@ -7,6 +7,7 @@
 {
   imports = [ 
     ../../modules/nixos
+    ../../modules/nixos/gnome.nix
     ../../modules/nixos/packages.nix
 
     # Include the results of the hardware scan.

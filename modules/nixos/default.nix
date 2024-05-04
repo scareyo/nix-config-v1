@@ -50,15 +50,4 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
-  programs.dconf.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
-    ];
-    config.common.default = "*";
-  };
 }

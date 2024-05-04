@@ -6,6 +6,7 @@
     packages ++ [
       cider
       firefox
+      gnome.gnome-tweaks
       prismlauncher
       vesktop
     ];

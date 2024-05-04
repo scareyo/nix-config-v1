@@ -22,12 +22,6 @@
     # NixOS Hardware
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
-    # Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    # Anyrun
-    anyrun.url = "github:Kirottu/anyrun";
-
     # Homebrew
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
 
